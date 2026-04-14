@@ -8,7 +8,7 @@
  * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
  * @author Andrés Cano Utrera <acu@decsai.ugr.es>
  * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * 
+ *
  * Created on 22 de octubre de 2025, 11:57
  */
 
@@ -22,7 +22,7 @@ const int ARRAY_CLUSTERING_CAPACITY_INCREMENT = 2;
 
 /**
  * @struct ArrayClustering
- * @brief An ArrayClustering object contains a dynamic array of Clustering 
+ * @brief An ArrayClustering object contains a dynamic array of Clustering
  * objects, along with its capacity and current size.
  */
 struct ArrayClustering{
@@ -33,14 +33,14 @@ struct ArrayClustering{
 
 /**
  * @brief Initializes the provided ArrayClustering with a given capacity. It
- * allocates a dynamic array of Clustering objects with the provided capacity, 
+ * allocates a dynamic array of Clustering objects with the provided capacity,
  * sets the capacity field and initializes the size field to 0.
  * @throw std::out_of_range Throws a std::out_of_range exception if the
  * provided capacity is less than or equal to 0.
  * @param arrayClustering The ArrayClustering to initialize. Output parameter
  * @param capacity The initial capacity of the array. Input parameter
  */
-void InitializeArrayClustering(ArrayClustering arrayClustering, 
+void InitializeArrayClustering(ArrayClustering arrayClustering,
     int capacity=INITIAL_ARRAY_CLUSTERING_CAPACITY);
 
 /**
@@ -56,7 +56,7 @@ void DeallocateArrayClustering(ArrayClustering arrayClustering);
  * ArrayClustering. The search is performed by comparing each Clustering object
  * in the array with the provided Clustering object using the
  * Clustering::isEquivalentTo() method.
- * @param arrayClustering The ArrayClustering where to search will be 
+ * @param arrayClustering The ArrayClustering where to search will be
  * performed. Input parameter
  * @param clustering The Clustering object to search for. Input parameter
  * @return The position of the Clustering object in the array if found;
@@ -67,10 +67,10 @@ int FindArrayClustering(ArrayClustering arrayClustering,
 
 /**
  * @brief Appends the given Clustering object to the provided ArrayClustering
- * object. The Clustering object is only appended if the array does not 
+ * object. The Clustering object is only appended if the array does not
  * contain another Clustering object equivalent to the one being inserted.
  * If the array is full and the Clustering object must be appended to the array,
- * this function resizes the array with a capacity equal to the current 
+ * this function resizes the array with a capacity equal to the current
  * capacity plus an extra block of size equal to
  * ARRAY_CLUSTERING_CAPACITY_INCREMENT.
  * @param arrayClustering The ArrayClustering where the Clustering object will

@@ -8,7 +8,7 @@
  * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
  * @author Andrés Cano Utrera <acu@decsai.ugr.es>
  * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * 
+ *
  * Created on 24 de octubre de 2025, 9:27
  */
 
@@ -43,34 +43,34 @@ void showHelp(std::ostream& outputStream, const string &message) {
 
 /**
  * The purpose of this program is to read a set of locations from
- * a loc file and make different clustering processes of these locations, 
+ * a loc file and make different clustering processes of these locations,
  * showing some statistics of the resulting clusterings on the standard output.
- * 
- * The program first reads the locations from a file whose name is provided as 
- * the last command line argument. It also reads from the command line an 
+ *
+ * The program first reads the locations from a file whose name is provided as
+ * the last command line argument. It also reads from the command line an
  * integer K to set the number of clusters to be used in the clustering
- * processes. It also reads from the command line two integers minSeed and 
- * maxSeed  to set a range of seeds to be used in the different clustering 
- * processes. 
- * The program performs different clustering processes using the K-means 
- * algorithm with seeds in the range from minSeed to maxSeed 
- * (both included). The resulting Clustering objects are stored in an 
- * ArrayClustering object, that represents a dynamic array of Clustering 
+ * processes. It also reads from the command line two integers minSeed and
+ * maxSeed  to set a range of seeds to be used in the different clustering
+ * processes.
+ * The program performs different clustering processes using the K-means
+ * algorithm with seeds in the range from minSeed to maxSeed
+ * (both included). The resulting Clustering objects are stored in an
+ * ArrayClustering object, that represents a dynamic array of Clustering
  * objects. At the end, the program sorts the different Clustering objects
- * stored in the ArrayClustering object in ascending order of the sum of 
+ * stored in the ArrayClustering object in ascending order of the sum of
  * within-cluster variances. If two Clustering objects have the same sum of
  * within-cluster variances, they are further sorted by their number of
  * iterations in ascending order.
  * Finally, the program shows some statistics about each of clustering stored
- * in the ArrayClustering object, including the value of K, the sum of the 
- * within-cluster variances, and the number of iterations used by the 
+ * in the ArrayClustering object, including the value of K, the sum of the
+ * within-cluster variances, and the number of iterations used by the
  * clustering algorithm until convergence.
- * 
+ *
  * Be careful to show the output as in the below example.
- *  
+ *
  * Running sintax:
  * > build/Fraud2 <K> <minSeed> <maxSeed> <inputFile.loc>
- * 
+ *
  * Running example:
  * > build/Fraud2 5 0 3 ../Datasets/dataP2/princeton_names.loc
 Clustering 0:
@@ -100,13 +100,13 @@ int main(int argc, char* argv[]) {
 
     // Read K from the command line arguments
 
-    // Read the seed range from the command line arguments 
+    // Read the seed range from the command line arguments
     // (use stoul to convert string to unsigned int)
 
     // Read from the input file the locations directly into the VectorLocation object
 
     // Initialize the arrayClustering object with an initial capacity of 2
-    
+
     // For each seed in the given range, perform a clustering and store it in
     // arrayClustering
 
@@ -116,6 +116,6 @@ int main(int argc, char* argv[]) {
     // Show statistics of each clustering in the sorted order
 
     // Deallocate the dynamic memory used by arrayClustering
-    
+
     return 0;
 }

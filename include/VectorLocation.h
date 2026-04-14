@@ -27,7 +27,8 @@
  * This class uses an array of Location objects with a fixed capacity
  * to store the set of locations.
  */
-class VectorLocation {
+class VectorLocation
+{
 public:
     /**
      * @brief It builds a VectorLocation object (vector of Location objects)
@@ -55,21 +56,14 @@ public:
      */
     int getCapacity() const;
 
-   /**
-     * @brief Obtains a string with information about this VectorLocation object, 
+    /**
+     * @brief Obtains a string with information about this VectorLocation object,
      * in the following format:
-     * - First line, the number of Location objects in this vector, converted to
-     * a string (using the to_string(int) C++ function). 
-     * - For each Location, a line with its information, converted to
-     * a string with the Location::toString() method.
-     * 
-     * For example, the following is the content of the string for a 
-     * VectorLocation object with 4 locations:
-4
-24.8 14.9 Quadrangle
-25.6 14.9 Ivy
-26.4 14.9 Cottage
-27.3 14.5 Cap & Gown
+     * - First line, the number of Location objects in this vector converted to
+     * a string (using the to_string(int) C++ function).
+     * - For each Location, a line with its x and y coordinates, converted to
+     * a string (using the to_string(int) C++ function) and separated by a
+     * whitespace.
      * Query method
      * @return string with information about this VectorLocation object
      */
@@ -130,13 +124,12 @@ public:
 
     /**
      * @brief Appends a copy of the given Location object at the first free
-     * position in the array of Location in this object. The location is only
-     * appended to this object if it was not already found in this object or 
-     * its name is an empty string.
+     * position in the array of Location in this object. The location is
+     * not appended to this object if it was already found in this object.
      * @throw std::out_of_range Throws a std::out_of_range exception if the
-     * provided location is going to be appended but the array of Location 
-     * was full (its capacity was full). If the provided location is not going 
-     * to be appended because it was already found in this object or its name 
+     * provided location is going to be appended but the array of Location
+     * was full (its capacity was full). If the provided location is not going
+     * to be appended because it was already found in this object or its name
      * is an empty string, then no exception is thrown.
      * Modifier method
      * @param value the new Location object to be appended. Input parameter
@@ -175,22 +168,22 @@ public:
      * location.
      * If returns -1 if this vector is empty
      */
-    int nearest(Location location);
+    int nearest(const Location &location) const;
 
     /**
      * Assigns the provided value to all the elements in this vector
      * Modifier method
      * @param location A Location object. Input parameter
      */
-    void assign(Location location);
+    void assign(const Location &location);
 
     /**
      * @brief Reads from the provided input stream the information
      * to fill this VectorLocation object.
      * @note This method should remove any Location previously contained in the
-     * provided VectorLocation object. See files *.loc in the folder DataSets 
-     * as examples of this kind of file. 
-     * @note This operator throws an exception in some error cases (see below). 
+     * provided VectorLocation object. See files *.loc in the folder DataSets
+     * as examples of this kind of file.
+     * @note This operator throws an exception in some error cases (see below).
      * Before throwing the corresponding exception, this method clears
      * the object (it calls to clear() method) to leave the object in a
      * consistent state.
@@ -202,7 +195,7 @@ public:
      * of this VectorLocation object.
      * @param is Input stream. Input/output parameter
      */
-    void load(std::istream is);
+    void load(std::istream &is);
 
 private:
     /**
@@ -211,12 +204,12 @@ private:
     static const int DIM_VECTOR_LOCATIONS = 100;
 
     /**
-     * Array of Locations
+     * Pointer to a dynamic array of Locations
      */
     Location _locations[DIM_VECTOR_LOCATIONS];
 
     /**
-     * Number of Location objects contained in the array _locations
+     * Number of Location objects contained in the dynamic array _locations
      */
     int _size;
 }; // end of class VectorLocation
