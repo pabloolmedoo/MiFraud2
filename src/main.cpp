@@ -8,7 +8,8 @@
  * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
  * @author Andrés Cano Utrera <acu@decsai.ugr.es>
  * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- *
+ * @author estudiante1: Villalobos Pérez, Alberto
+ * @author estudiante2: Olmedo Medina, Pablo
  * Created on 24 de octubre de 2025, 9:27
  */
 
