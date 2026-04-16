@@ -25,7 +25,14 @@
  * @param capacity The initial capacity of the array. Input parameter
  */
 void InitializeArrayClustering(ArrayClustering &arrayClustering,
-                               int capacity = INITIAL_ARRAY_CLUSTERING_CAPACITY);
+                               int capacity = INITIAL_ARRAY_CLUSTERING_CAPACITY){
+                                if (capacity <= 0) {
+                                    throw std::out_of_range("Capacity must be greater than 0");
+                                }
+                                arrayClustering.clustering = new Clustering[capacity];
+                                arrayClustering.capacity = capacity;
+                                arrayClustering.size = 0;
+                               }
 
 /**
  * @brief Deallocates the dynamic array of Clustering objects in the provided
@@ -33,7 +40,11 @@ void InitializeArrayClustering(ArrayClustering &arrayClustering,
  * capacity and size fields to 0.
  * @param arrayClustering The ArrayClustering to deallocate. Output parameter
  */
-void DeallocateArrayClustering(ArrayClustering &arrayClustering);
+void DeallocateArrayClustering(ArrayClustering &arrayClustering){
+    arrayClustering.capacity = 0;
+    arrayClustering.size = 0;
+    arrayClustering.clustering = nullptr;
+}
 
 /**
  * @brief Searches for a given Clustering object in the provided
@@ -47,7 +58,14 @@ void DeallocateArrayClustering(ArrayClustering &arrayClustering);
  * -1 otherwise.
  */
 int FindArrayClustering(ArrayClustering &arrayClustering,
-                                         Clustering &clustering);
+                                         Clustering &clustering){
+    for (int i = 0; i < arrayClustering.size; i++) {
+        if (arrayClustering.clustering[i].isEquivalentTo(clustering)) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 /**
  * @brief Appends the given Clustering object to the provided ArrayClustering
@@ -62,7 +80,23 @@ int FindArrayClustering(ArrayClustering &arrayClustering,
  * @param clustering The Clustering object to append. Input parameter
  */
 void AppendArrayClustering(ArrayClustering &arrayClustering,
-                                            const Clustering &clustering);
+                                            const Clustering &clustering){
+                                                if (FindArrayClustering(arrayClustering, clustering) != -1) {
+                                                    return;
+                                                }
+                                                if (arrayClustering.size >= arrayClustering.capacity) {
+                                                    int newCapacity = arrayClustering.capacity + ARRAY_CLUSTERING_CAPACITY_INCREMENT;
+                                                    Clustering* newArray = new Clustering[newCapacity];
+                                                    for (int i = 0; i < arrayClustering.size; i++) {
+                                                        newArray[i] = arrayClustering.clustering[i];
+                                                    }
+                                                    delete[] arrayClustering.clustering;
+                                                    arrayClustering.clustering = newArray;
+                                                    arrayClustering.capacity = newCapacity;
+                                                }
+                                                arrayClustering.clustering[arrayClustering.size] = clustering;
+                                                arrayClustering.size++;
+                                            }
 
 /**
  * @brief Sorts the Clustering objects in the provided ArrayClustering in
@@ -71,4 +105,21 @@ void AppendArrayClustering(ArrayClustering &arrayClustering,
  * further sorted by their number of iterations in ascending order.
  * @param arrayClustering The ArrayClustering to sort. Output parameter
  */
-void SortArrayClustering(ArrayClustering &arrayClustering);
+void SortArrayClustering(ArrayClustering &arrayClustering){
+    Clustering auxiliar;
+    for (int i = 0; i < arrayClustering.size - 1; i++) {
+        for (int j = i + 1; j < arrayClustering.size; j++) {
+            if (arrayClustering.clustering[i].getSumWCV() > arrayClustering.clustering[j].getSumWCV()) {
+                auxiliar = arrayClustering.clustering[i];
+                arrayClustering.clustering[i] = arrayClustering.clustering[j];
+                arrayClustering.clustering[j] = auxiliar;
+            } else if (arrayClustering.clustering[i].getSumWCV() == arrayClustering.clustering[j].getSumWCV()) {
+                if (arrayClustering.clustering[i].getNumIterations() > arrayClustering.clustering[j].getNumIterations()) {
+                    auxiliar = arrayClustering.clustering[i];
+                    arrayClustering.clustering[i] = arrayClustering.clustering[j];
+                    arrayClustering.clustering[j] = auxiliar;
+                }
+            }
+        }
+    }
+}
