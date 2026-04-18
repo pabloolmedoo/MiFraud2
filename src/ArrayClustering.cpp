@@ -25,7 +25,7 @@
  * @param capacity The initial capacity of the array. Input parameter
  */
 void InitializeArrayClustering(ArrayClustering &arrayClustering,
-                               int capacity = INITIAL_ARRAY_CLUSTERING_CAPACITY){
+                               int capacity){
                                 if (capacity <= 0) {
                                     throw std::out_of_range("Capacity must be greater than 0");
                                 }
@@ -58,7 +58,7 @@ void DeallocateArrayClustering(ArrayClustering &arrayClustering){
  * -1 otherwise.
  */
 int FindArrayClustering(ArrayClustering &arrayClustering,
-                                         Clustering &clustering){
+                                         const Clustering &clustering){
     for (int i = 0; i < arrayClustering.size; i++) {
         if (arrayClustering.clustering[i].isEquivalentTo(clustering)) {
             return i;

@@ -98,21 +98,38 @@ int main(int argc, char* argv[]) {
     ifstream inputFile; // Input file stream for the loc file
 
     // Check if the number of arguments is valid.
+    if(argc != 5){
+        showHelp(cerr, "El numero de argumentos no es valido" );
+    }
 
     // Read K from the command line arguments
+    K = atoi(argv[1]);
 
     // Read the seed range from the command line arguments
     // (use stoul to convert string to unsigned int)
+    minSeed = stoul(argv[2]);
+    maxSeed = stoul(argv[3]);
 
     // Read from the input file the locations directly into the VectorLocation object
+    inputFile.open("inputFile.loc");
+    for(int i = 0; i < locations.getSize(); i++){
+        locations.load(inputFile);
+    }
+    inputFile.close();
 
     // Initialize the arrayClustering object with an initial capacity of 2
+    InitializeArrayClustering(arrayClustering,2);
 
     // For each seed in the given range, perform a clustering and store it in
     // arrayClustering
-
+    for(int i = minSeed; i < maxSeed; i++){
+        clustering.set(locations, K, i);
+        clustering.run();
+        AppendArrayClustering(arrayClustering, clustering);
+    }
 
     // Sort the different Clustering objects stored in arrayClustering
+    SortArrayClustering(arrayClustering);
 
     // Show statistics of each clustering in the sorted order
 
