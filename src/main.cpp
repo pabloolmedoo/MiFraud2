@@ -132,8 +132,12 @@ int main(int argc, char* argv[]) {
     SortArrayClustering(arrayClustering);
 
     // Show statistics of each clustering in the sorted order
+    for(int i = 0; i < arrayClustering.size; i++){
+        cout << arrayClustering.clustering[i].toString() << endl;
+    }
 
     // Deallocate the dynamic memory used by arrayClustering
-
+    DeallocateArrayClustering(arrayClustering);
+    
     return 0;
 }
