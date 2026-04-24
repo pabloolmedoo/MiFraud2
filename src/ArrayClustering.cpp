@@ -41,9 +41,10 @@ void InitializeArrayClustering(ArrayClustering &arrayClustering,
  * @param arrayClustering The ArrayClustering to deallocate. Output parameter
  */
 void DeallocateArrayClustering(ArrayClustering &arrayClustering){
+    delete[] arrayClustering.clustering;
+    arrayClustering.clustering = nullptr;
     arrayClustering.capacity = 0;
     arrayClustering.size = 0;
-    arrayClustering.clustering = nullptr;
 }
 
 /**
@@ -58,7 +59,7 @@ void DeallocateArrayClustering(ArrayClustering &arrayClustering){
  * -1 otherwise.
  */
 int FindArrayClustering(ArrayClustering &arrayClustering,
-                                         const Clustering &clustering){
+                                        const  Clustering &clustering){
     for (int i = 0; i < arrayClustering.size; i++) {
         if (arrayClustering.clustering[i].isEquivalentTo(clustering)) {
             return i;

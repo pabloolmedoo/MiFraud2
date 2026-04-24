@@ -63,7 +63,7 @@ void DeallocateArrayClustering(ArrayClustering &arrayClustering);
  * -1 otherwise.
  */
 int FindArrayClustering(ArrayClustering &arrayClustering,
-                        Clustering &clustering);
+                        const Clustering &clustering);
 
 /**
  * @brief Appends the given Clustering object to the provided ArrayClustering

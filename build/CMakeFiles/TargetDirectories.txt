@@ -1,3 +1,0 @@
-/home/usuario/MP/MiFraud2/MiFraud2/build/CMakeFiles/Fraud2.dir
-/home/usuario/MP/MiFraud2/MiFraud2/build/CMakeFiles/edit_cache.dir
-/home/usuario/MP/MiFraud2/MiFraud2/build/CMakeFiles/rebuild_cache.dir
