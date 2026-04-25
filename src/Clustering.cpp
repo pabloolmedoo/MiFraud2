@@ -414,3 +414,40 @@ std::string Clustering::toString() const
 
     return result;
 }
+
+/**
+     * @brief Performs an initial assignment of a cluster to each one of the
+     * Location objects. This method begins by initializing the random number
+     * generator using:
+     * srand(seed);
+     * Then, for each location i, assign cluster number rand() % _K to that
+     * location.
+     * Modifier method
+     */
+    void Clustering::initialClusterAssignment(){
+        srand(_seed);
+
+        for (int i = 0; i < _locations.getSize(); i++){
+            _clusters.at(i) = rand() % _K;
+        }
+    }
+
+    /**
+     * @brief Calculates the sum of the within-cluster variances of this
+     * Clustering object.
+     * The within-cluster variance of a cluster C_j is calcultated with:
+     * $\sum_{p_i \in C_j} squaredDistance(p_i, centroid_{C_j})$
+     * @return A double with the sum of within-cluster variances of this
+     * Clustering
+     * Modifier method
+     */
+    double Clustering::calculateSumWCV(){
+        double _sumWCV = 0.0;
+
+        for (int i = 0; i < _locations.getSize(); i++){
+            int cluster = _clusters.at(i);
+            _sumWCV += _locations.at(i).squaredDistance(_centroids.at(cluster));
+        }
+
+        return _sumWCV;
+    }

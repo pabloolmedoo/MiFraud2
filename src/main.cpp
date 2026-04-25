@@ -98,8 +98,9 @@ int main(int argc, char* argv[]) {
     ifstream inputFile; // Input file stream for the loc file
 
     // Check if the number of arguments is valid.
-    if(argc != 5){
-        showHelp(cerr, "El numero de argumentos no es valido" );
+    if(argc < 5){
+        showHelp(cerr, "Not enough arguments" );
+        return 1;
     }
 
     // Read K from the command line arguments
@@ -111,18 +112,23 @@ int main(int argc, char* argv[]) {
     maxSeed = stoul(argv[3]);
 
     // Read from the input file the locations directly into the VectorLocation object
-    inputFile.open("inputFile.loc");
-    for(int i = 0; i < locations.getSize(); i++){
+    inputFile.open(argv[4]);
+    if(inputFile){
         locations.load(inputFile);
+        inputFile.close();
+    }else{
+        string e = "Error opening input file: ";
+        e += argv[4];
+        showHelp(cerr, e);
+        return 1;
     }
-    inputFile.close();
 
     // Initialize the arrayClustering object with an initial capacity of 2
     InitializeArrayClustering(arrayClustering,2);
 
     // For each seed in the given range, perform a clustering and store it in
     // arrayClustering
-    for(int i = minSeed; i < maxSeed; i++){
+    for(unsigned int i = minSeed; i <= maxSeed; i++){
         clustering.set(locations, K, i);
         clustering.run();
         AppendArrayClustering(arrayClustering, clustering);
@@ -133,7 +139,8 @@ int main(int argc, char* argv[]) {
 
     // Show statistics of each clustering in the sorted order
     for(int i = 0; i < arrayClustering.size; i++){
-        cout << arrayClustering.clustering[i].toString() << endl;
+        cout << "Clustering " << i << ":" << endl;
+        cout << arrayClustering.clustering[i].getStatistics() << endl;
     }
 
     // Deallocate the dynamic memory used by arrayClustering
