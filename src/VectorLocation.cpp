@@ -72,13 +72,7 @@ std::string VectorLocation::toString() const
 
     for (int i = 0; i < _size; i++)
     {
-        output += std::to_string(_locations[i].getX()) + " " +
-                  std::to_string(_locations[i].getY());
-
-        if (_locations[i].getName() != "")
-            output += " " + _locations[i].getName();
-
-        output += "\n";
+        output += _locations[i].toString() + "\n";
     }
 
     return output;
@@ -208,9 +202,8 @@ bool VectorLocation::append(const Location &location)
         throw std::out_of_range("append: el vector esta completo3");
     }
 
-    _locations[_size].setX(location.getX());
-    _locations[_size].setY(location.getY());
-    _locations[_size].setName(location.getName());
+    _locations[_size]=location;
+    
     _size++;
     return true;
 }
@@ -348,6 +341,6 @@ void VectorLocation::load(std::istream &is)
     for (int i = 0; i < _size; i++)
     {
         data.load(is);
-        _locations[i].set(data.getX(), data.getY(), data.getName());
+        _locations[i]=data;
     }
 }

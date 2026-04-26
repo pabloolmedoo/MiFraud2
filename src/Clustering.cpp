@@ -219,7 +219,7 @@ bool Clustering::isEquivalentTo(const Clustering &other) const
  * (with srand(seed)) in the initialClusterAssignment() method.
  * Input parameter
  */
-void Clustering::set(VectorLocation locations, int K, unsigned int seed)
+void Clustering::set(const VectorLocation &locations, int K, unsigned int seed)
 {
     if (K <= 0)
     {

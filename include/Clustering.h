@@ -234,7 +234,7 @@ Cluster 4 information:
      * (with srand(seed)) in the initialClusterAssignment() method.
      * Input parameter
      */
-    void set(VectorLocation locations, int K,
+    void set(const VectorLocation &locations, int K,
              unsigned int seed = DEFAULT_RANDOM_SEED);
 
     /**
