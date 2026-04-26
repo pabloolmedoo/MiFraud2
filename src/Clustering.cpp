@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include "Clustering.h"
 #include "Location.h"
 #include "VectorInt.h"
@@ -44,7 +45,7 @@ int Clustering::getK() const
  * @return A const reference to the vector of centroids (a VectorLocation
  * object).
  */
-VectorLocation Clustering::getCentroids() const
+const VectorLocation& Clustering::getCentroids() const
 {
     return _centroids;
 }
@@ -191,7 +192,7 @@ std::string Clustering::getStatistics() const
  * @return true if this Clustering object is equivalent to the provided
  * Clustering object (@p other); false otherwise
  */
-bool Clustering::isEquivalentTo(Clustering other) const
+bool Clustering::isEquivalentTo(const Clustering &other) const
 {
     if (!_isDone || !other._isDone)
     {
@@ -269,12 +270,7 @@ void Clustering::set(VectorLocation locations, int K, unsigned int seed)
  */
 void Clustering::run()
 {
-    srand(_seed);
-
-    for (int i = 0; i < _locations.getSize(); i++)
-    {
-        _clusters.at(i) = rand() % _K;
-    }
+    initialClusterAssignment();
 
     bool changed = true;
     _numIterations = 0;
@@ -335,12 +331,7 @@ void Clustering::run()
         }
     }
 
-    _sumWCV = 0.0;
-    for (int i = 0; i < _locations.getSize(); i++)
-    {
-        int cluster = _clusters.at(i);
-        _sumWCV += _locations.at(i).squaredDistance(_centroids.at(cluster));
-    }
+    calculateSumWCV();
 
     _isDone = true;
 }
@@ -442,7 +433,7 @@ std::string Clustering::toString() const
      * Modifier method
      */
     double Clustering::calculateSumWCV(){
-        double _sumWCV = 0.0;
+        _sumWCV = 0.0;
 
         for (int i = 0; i < _locations.getSize(); i++){
             int cluster = _clusters.at(i);

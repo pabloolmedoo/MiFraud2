@@ -328,19 +328,21 @@ void VectorLocation::load(std::istream &is)
     Location data;
     int nlocs;
 
-    clear();
-
     is >> nlocs;
 
     if (nlocs < 0)
     {
+        clear();
         throw std::out_of_range("El numero de localizaciones es negativo");
     }
     if (nlocs > getCapacity())
     {
+        clear();
         throw std::out_of_range("El numero de ubicaciones es mas grande que la capacidad");
     }
 
+    clear();
+    
     _size = nlocs;
 
     for (int i = 0; i < _size; i++)

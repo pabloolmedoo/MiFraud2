@@ -58,7 +58,7 @@ void DeallocateArrayClustering(ArrayClustering &arrayClustering){
  * @return The position of the Clustering object in the array if found;
  * -1 otherwise.
  */
-int FindArrayClustering(ArrayClustering &arrayClustering,
+int FindArrayClustering(const ArrayClustering &arrayClustering,
                                         const  Clustering &clustering){
     for (int i = 0; i < arrayClustering.size; i++) {
         if (arrayClustering.clustering[i].isEquivalentTo(clustering)) {

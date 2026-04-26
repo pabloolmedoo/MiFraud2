@@ -61,7 +61,7 @@ public:
      * @return A const reference to the vector of centroids (a VectorLocation
      * object).
      */
-    VectorLocation getCentroids() const;
+    const VectorLocation& getCentroids() const;
 
     /**
      * @brief Indicates whether the clustering algorithm (run() method) has
@@ -160,7 +160,7 @@ public:
      * @return true if this Clustering object is equivalent to the provided
      * Clustering object (@p other); false otherwise
      */
-    bool isEquivalentTo(Clustering other) const;
+    bool isEquivalentTo(const Clustering &other) const;
 
     /**
      * @brief Obtains a string with the fields of this Clustering object.
